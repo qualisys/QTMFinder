@@ -5,8 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QTMFinder"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="QTM Finder" Width="800" Height="522">
+    <StackPanel>
+      <Image Margin="10" Source="qualisys_logo.png" HorizontalAlignment="Center" Height="32"/>
+
+      <ListView x:Name="ResultsListView"
+        HorizontalAlignment="Center"
+        Height="360"
+        Margin="10"
+        SelectionMode="Single"
+        GridViewColumnHeader.Click="GridViewColumnHeader_Clicked">
+        <ListView.View>
+          <GridView>
+            <GridViewColumn Header="Host Name" Width="160" DisplayMemberBinding="{Binding HostName}" />
+            <GridViewColumn Header="IP Address (click to copy)" Width="160">
+              <GridViewColumn.CellTemplate>
+                <DataTemplate>
+                  <TextBlock Text="{Binding IpAddress}" TextDecorations="Underline" Foreground="Blue" Cursor="Hand" MouseDown="IpAddress_MouseDown"/>
+                </DataTemplate>
+              </GridViewColumn.CellTemplate>
+            </GridViewColumn>
+            <GridViewColumn Header="Camera Count" Width="100" DisplayMemberBinding="{Binding CameraCount}" />
+            <GridViewColumn Header="Port" Width="80" DisplayMemberBinding="{Binding Port}" />
+            <GridViewColumn Header="Info Text" Width="240" DisplayMemberBinding="{Binding InfoText}" />
+          </GridView>
+        </ListView.View>
+      </ListView>
+      <Button Content="Refresh" HorizontalAlignment="Center" Margin="10" VerticalAlignment="Bottom" Width="75" Click="Button_Click" />
+    </StackPanel>
 </Window>
